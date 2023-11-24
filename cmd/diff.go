@@ -71,5 +71,6 @@ func ExecuteDiff(data1, data2 []string) string {
 		sb.WriteString("<" + diff2[j] + "\n")
 		j++
 	}
-	return sb.String()
+	ss := sb.String()
+	return ss[:len(ss)-1]
 }

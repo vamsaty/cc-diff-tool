@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	ccUtils "github.com/vamsaty/cc-utils"
 	"log"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -12,20 +14,25 @@ func main() {
 		log.Fatalln("Usage: cc-diff-tool -file1 <file1> -file2 <file2>")
 	}
 
-	fmt.Println(args[1], args[2])
+	// Check if the files exist
+	for _, fileName := range args[1:3] {
+		if !ccUtils.FileExists(fileName) {
+			log.Fatalln("File does not exist: ", fileName)
+		}
+	}
 
-	file1 := []string{
-		"Coding Challenges helps you become a better software engineer through that build real applications.",
-		"I share a weekly coding challenge aimed at helping software engineers level up their skills through deliberate practice.",
-		"I’ve used or am using these coding challenges as exercise to learn a new programming language or technology.",
-		"Each challenge will have you writing a full application or tool. Most of which will be based on real world tools and utilities.",
+	file1, err := ccUtils.ReadFile(args[1])
+	if err != nil {
+		log.Fatalln("Error reading file: ", args[1])
 	}
-	file2 := []string{
-		"Helping you become a better software engineer through coding challenges that build real applications.",
-		"I share a weekly coding challenge aimed at helping software engineers level up their skills through deliberate practice.",
-		"These are challenges that I’ve used or am using as exercises to learn a new programming language or technology.",
-		"Each challenge will have you writing a full application or tool. Most of which will be based on real world tools and utilities.",
+	file2, err := ccUtils.ReadFile(args[2])
+	if err != nil {
+		log.Fatalln("Error reading file: ", args[2])
 	}
-	output := ExecuteDiff(file1, file2)
+
+	output := ExecuteDiff(
+		strings.Split(string(file1), "\n"),
+		strings.Split(string(file2), "\n"),
+	)
 	fmt.Println(output)
 }
