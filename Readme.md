@@ -11,5 +11,3 @@ Steps to build the binary and execute it -
 go build ./cmd/*.go && ./diff file1 file2
 ``` 
 
-## Flags
-NOTE ()
