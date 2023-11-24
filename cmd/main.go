@@ -11,7 +11,7 @@ import (
 func main() {
 	args := os.Args
 	if len(args) < 3 {
-		log.Fatalln("Usage: cc-diff-tool -file1 <file1> -file2 <file2>")
+		log.Fatalln("Usage: cc-diff-tool file1 file2")
 	}
 
 	// Check if the files exist

@@ -12,4 +12,4 @@ go build ./cmd/*.go && ./diff file1 file2
 ``` 
 
 ## Flags
-None (TODO: support flag for port number)
+NOTE ()
